@@ -8,7 +8,9 @@ WHERE = ("upper(license_description) like '%TAVERN%' "
          "OR upper(license_description) like '%LATE HOUR%' "
          "OR upper(license_description) like '%CONSUMPTION ON PREMISES%'")
 
-out_dir = Path(r"C:\barscene-data\bronze\licenses") / f"snapshot_date={date.today()}"
+import os
+DATA_DIR = Path(os.environ.get("DATA_DIR", r"C:\barscene-data"))
+out_dir = DATA_DIR / "bronze" / "licenses" / f"snapshot_date={date.today()}"
 out_dir.mkdir(parents=True, exist_ok=True)
 
 rows, offset, limit = [], 0, 50000

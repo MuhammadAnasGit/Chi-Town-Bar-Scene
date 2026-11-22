@@ -1,8 +1,10 @@
 import duckdb
 from pathlib import Path
 
-src = "C:/barscene-data/bronze/licenses/snapshot_date=*/licenses.json"
-out = "C:/barscene-data/silver/bars.parquet"
+import os
+DATA_DIR = os.environ.get("DATA_DIR", "C:/barscene-data").replace("\\", "/")
+src = f"{DATA_DIR}/bronze/licenses/snapshot_date=*/licenses.json"
+out = f"{DATA_DIR}/silver/bars.parquet"
 
 con = duckdb.connect()
 Path(out).parent.mkdir(parents=True, exist_ok=True)  # create the silver folder if missing
